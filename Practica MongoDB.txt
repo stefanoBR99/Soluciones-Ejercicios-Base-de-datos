@@ -1,0 +1,564 @@
+db.movies.find().pretty()
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068b"},
+    "actores": ["Brad Pitt", "Edward Norton"],
+    "anio": 1999,
+    "escritor": "Chuck Palahniuk",
+    "titulo": "Fight Club"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068c"},
+    "actores": ["John Travolta", "Uma Thurman"],
+    "anio": 1994,
+    "escritor": "Quentin Tarantino",
+    "titulo": "Pulp Fiction"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068d"},
+    "actores": ["Brad Pitt", "Diane Kruger", "Eli Roth"],
+    "anio": 2009,
+    "escritor": "Quentin Tarantino",
+    "titulo": "Inglorious Basterds"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068e"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "titulo": "The Hobbit: An Unexpected Journey",
+    "franquicia": "The Hobbit"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068f"},
+    "anio": 2013,
+    "escritor": "J.R.R. Tolkein",
+    "titulo": "The Hobbit: The Desolation of Smaug",
+    "franquicia": "The Hobbit"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f0690"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "titulo": "The Hobbit: The Battle of the Five Armies",
+    "franquicia": "The Hobbit",
+    "sinopsis": "Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness."
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f0691"},
+    "titulo": "Pee Wee Herman's Big Adventure"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f0692"},
+    "titulo": "Avatar"
+  }
+]
+
+db.movies.find({escritor: "Quentin Tarantino"})
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068c"},
+    "actores": ["John Travolta", "Uma Thurman"],
+    "anio": 1994,
+    "escritor": "Quentin Tarantino",
+    "titulo": "Pulp Fiction"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068d"},
+    "actores": ["Brad Pitt", "Diane Kruger", "Eli Roth"],
+    "anio": 2009,
+    "escritor": "Quentin Tarantino",
+    "titulo": "Inglorious Basterds"
+  }
+]
+
+db.movies.find({"actores": "Brad Pitt"})
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068b"},
+    "actores": ["Brad Pitt", "Edward Norton"],
+    "anio": 1999,
+    "escritor": "Chuck Palahniuk",
+    "titulo": "Fight Club"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068d"},
+    "actores": ["Brad Pitt", "Diane Kruger", "Eli Roth"],
+    "anio": 2009,
+    "escritor": "Quentin Tarantino",
+    "titulo": "Inglorious Basterds"
+  }
+]
+
+db.movies.find({franquicia: "The Hobbit"})
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068e"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "titulo": "The Hobbit: An Unexpected Journey"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068f"},
+    "anio": 2013,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "titulo": "The Hobbit: The Desolation of Smaug"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f0690"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "titulo": "The Hobbit: The Battle of the Five Armies",
+    "sinopsis": "Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness."
+  }
+]
+db.movies.find({anio: {$gte: 1991, $lte: 2000}})
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068b"},
+    "actores": ["Brad Pitt", "Edward Norton"],
+    "anio": 1999,
+    "escritor": "Chuck Palahniuk",
+    "titulo": "Fight Club"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068c"},
+    "actores": ["John Travolta", "Uma Thurman"],
+    "anio": 1994,
+    "escritor": "Quentin Tarantino",
+    "titulo": "Pulp Fiction"
+  }
+]
+
+db.movies.updateOne(
+   {titulo: "The Hobbit: An Unexpected Journey"},
+   {$set: {sinopsis: "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug."}}
+   )
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068e"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.",
+    "titulo": "The Hobbit: An Unexpected Journey"
+  }
+]
+
+db.movies.updateOne(
+   {titulo: "The Hobbit: The Desolation of Smaug"},
+   {$set: {sinopsis: "The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring."}}
+   )
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068f"},
+    "anio": 2013,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring.",
+    "titulo": "The Hobbit: The Desolation of Smaug"
+  }
+]
+
+ db.movies.updateOne(
+   {titulo: "Pulp Fiction"},
+   {$addToSet: {actores: "Samuel L. Jackson"}}
+   )
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068c"},
+    "actores": ["John Travolta", "Uma Thurman", "Samuel L. Jackson"],
+    "anio": 1994,
+    "escritor": "Quentin Tarantino",
+    "titulo": "Pulp Fiction"
+  }
+]
+db.movies.find({sinopsis: {$regex: "Bilbo"}})
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068e"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.",
+    "titulo": "The Hobbit: An Unexpected Journey"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068f"},
+    "anio": 2013,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring.",
+    "titulo": "The Hobbit: The Desolation of Smaug"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f0690"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness.",
+    "titulo": "The Hobbit: The Battle of the Five Armies"
+  }
+]
+
+db.movies.find({sinopsis: {$regex: "Gandalf"}})
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068f"},
+    "anio": 2013,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring.",
+    "titulo": "The Hobbit: The Desolation of Smaug"
+  }
+]
+
+ db.movies.find({
+   "sinopsis": {
+   $regex: /Bilbo/i,
+   $not: /Gandalf/i
+   }
+   })
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068e"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.",
+    "titulo": "The Hobbit: An Unexpected Journey"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f0690"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "Bilbo and Company are forced to engage in a war against an array of combatants and keep the Lonely Mountain from falling into the hands of a rising darkness.",
+    "titulo": "The Hobbit: The Battle of the Five Armies"
+  }
+]
+
+ db.movies.find(
+   { $or: [ { sinopsis: { $regex: /dwarves/i } }, { sinopsis: { $regex: /hobbit/i } } ] }
+   )
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068e"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.",
+    "titulo": "The Hobbit: An Unexpected Journey"
+  },
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068f"},
+    "anio": 2013,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "The dwarves, along with Bilbo Baggins and Gandalf the Grey, continue their quest to reclaim Erebor, their homeland, from Smaug. Bilbo Baggins is in possession of a mysterious and magical ring.",
+    "titulo": "The Hobbit: The Desolation of Smaug"
+  }
+]
+
+db.movies.find(
+   { $and: [
+   { sinopsis: { $regex: /gold/ } },
+   { sinopsis: { $regex: /dragon/ } }
+   ] }
+   )
+
+[
+  {
+    "_id": {"$oid": "67191fc4ba7b797c057f068e"},
+    "anio": 2012,
+    "escritor": "J.R.R. Tolkein",
+    "franquicia": "The Hobbit",
+    "sinopsis": "A reluctant hobbit, Bilbo Baggins, sets out to the Lonely Mountain with a spirited group of dwarves to reclaim their mountain home - and the gold within it - from the dragon Smaug.",
+    "titulo": "The Hobbit: An Unexpected Journey"
+  }
+]
+
+db.movies.deleteOne({titulo: "Pee Wee Herman's Big Adventure"})
+
+[
+  {
+    "acknowledged": true,
+    "deletedCount": 1
+  }
+]
+
+db.movies.deleteOne({titulo: "Avatar"})
+
+[
+  {
+    "acknowledged": true,
+    "deletedCount": 1
+  }
+]
+
+db.movies.aggregate([
+{
+ $group: {
+ _id: null,
+ avg_rating: { $avg: "$rating" }
+}
+}
+])
+
+[
+  {
+    "_id": null,
+    "avg_rating": 8.9
+  }
+]
+
+db.movies.aggregate([
+{
+ $group: {
+ _id: "$director",
+ total_movies: { $sum: 1 }
+}
+}
+])
+
+[
+  {
+    "_id": "Francis Ford Coppola",
+    "total_movies": 1
+  },
+  {
+    "_id": null,
+    "total_movies": 6
+  },
+  {
+    "_id": "Quentin Tarantino",
+    "total_movies": 1
+  },
+  {
+    "_id": "Christopher Nolan",
+    "total_movies": 3
+  }
+]
+
+db.movies.aggregate([
+{
+ $match: { "box_office_millions": { $gt: 500 } }
+},
+{
+ $sort: { "rating": -1 }
+}
+])
+
+[
+  {
+    "_id": 3,
+    "box_office_millions": 1004.6,
+    "director": "Christopher Nolan",
+    "genres": ["Action", "Crime", "Drama"],
+    "rating": 9,
+    "release_year": 2008,
+    "title": "The Dark Knight"
+  },
+  {
+    "_id": 1,
+    "box_office_millions": 829.9,
+    "director": "Christopher Nolan",
+    "genres": ["Action", "Sci-Fi", "Thriller"],
+    "rating": 8.8,
+    "release_year": 2010,
+    "title": "Inception"
+  },
+  {
+    "_id": 5,
+    "box_office_millions": 677.5,
+    "director": "Christopher Nolan",
+    "genres": ["Adventure", "Drama", "Sci-Fi"],
+    "rating": 8.6,
+    "release_year": 2014,
+    "title": "Interstellar"
+  }
+]
+
+db.movies.aggregate([
+{
+ $unwind: "$genres"
+},
+{
+ $group: {
+ _id: "$genres",
+ total_movies: { $sum: 1 }
+}
+}
+])
+
+[
+  {
+    "_id": "Crime",
+    "total_movies": 3
+  },
+  {
+    "_id": "Sci-Fi",
+    "total_movies": 2
+  },
+  {
+    "_id": "Adventure",
+    "total_movies": 1
+  },
+  {
+    "_id": "Drama",
+    "total_movies": 4
+  },
+  {
+    "_id": "Action",
+    "total_movies": 2
+  },
+  {
+    "_id": "Thriller",
+    "total_movies": 1
+  }
+]
+
+db.Books.aggregate([
+   {
+      $lookup:
+         {
+           from: "Authors",
+           localField: "author_id",
+           foreignField: "_id",
+           as: "AuthorDetail"
+         }
+   }
+])
+
+[
+  {
+    "_id": 1,
+    "AuthorDetail": [
+      {
+        "_id": 1,
+        "name": "william shakespeare"
+      }
+    ],
+    "author_id": 1,
+    "price": 100,
+    "title": "The Alchemist"
+  },
+  {
+    "_id": 2,
+    "AuthorDetail": [
+      {
+        "_id": 2,
+        "name": "David copperfield"
+      }
+    ],
+    "author_id": 2,
+    "price": 200,
+    "title": "Charles Dicken"
+  },
+  {
+    "_id": 3,
+    "AuthorDetail": [
+      {
+        "_id": 1,
+        "name": "william shakespeare"
+      }
+    ],
+    "author_id": 1,
+    "price": 300,
+    "title": "The Pilgrimage"
+  },
+  {
+    "_id": 4,
+    "AuthorDetail": [
+      {
+        "_id": 3,
+        "name": "Paulo coelho"
+      }
+    ],
+    "author_id": 3,
+    "price": 400,
+    "title": "Othello"
+  }
+]
+
+db.Books.aggregate([ { $graphLookup: { from: "Books", startWith: "$_id", connectFromField: "book_id", connectToField: "_id", as: "Book_Details" } } ]
+
+[
+  {
+    "_id": 1,
+    "Book_Details": [],
+    "author_id": 1,
+    "price": 100,
+    "title": "The Alchemist"
+  },
+  {
+    "_id": 2,
+    "Book_Details": [],
+    "author_id": 2,
+    "price": 200,
+    "title": "Charles Dicken"
+  },
+  {
+    "_id": 3,
+    "Book_Details": [],
+    "author_id": 1,
+    "price": 300,
+    "title": "The Pilgrimage"
+  },
+  {
+    "_id": 4,
+    "Book_Details": [],
+    "author_id": 3,
+    "price": 400,
+    "title": "Othello"
+  }
+]
+
+db.Books.createIndex({ author_id: 1, price: -1 })
+
+[
+  {
+    "key": {
+      "_id": 1
+    },
+    "name": "_id_",
+    "v": 2
+  },
+  {
+    "key": {
+      "title": 1
+    },
+    "name": "title_1",
+    "v": 2
+  },
+  {
+    "key": {
+      "author_id": 1,
+      "price": -1
+    },
+    "name": "author_id_1_price_-1",
+    "v": 2
+  }
+]
+
+
+
+
+
+
+
+

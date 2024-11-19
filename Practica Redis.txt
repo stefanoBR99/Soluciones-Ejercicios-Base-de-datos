@@ -1,0 +1,111 @@
+SET nombre "Rafael"
+OK
+
+GET nombre
+"Rafael"
+
+DEL nombre
+(integer) 1
+
+GET nombre
+(nil)
+
+LPUSH tareas "Leer un libro"
+20:27:52 23 Oct 2024
+0.654 msec
+(integer) 3
+LPUSH tareas "Hacer ejercicio"
+20:27:52 23 Oct 2024
+0.83 msec
+(integer) 2
+LPUSH tareas "Estudiar Redis"
+20:27:52 23 Oct 2024
+1.084 msec
+(integer) 1
+
+LRANGE tareas 0 -1
+1) "Leer un libro"
+2) "Hacer ejercicio"
+3) "Estudiar Redis"
+
+RPOP tareas
+"Estudiar Redis"
+
+LRANGE tareas 0 -1
+1) "Leer un libro"
+2) "Hacer ejercicio"
+
+SADD frutas "manzana"
+SADD frutas "banana"
+SADD frutas "naranja"
+SADD frutas "naranja"
+20:30:21 23 Oct 2024
+0.624 msec
+(integer) 1
+SADD frutas "banana"
+20:30:21 23 Oct 2024
+0.787 msec
+(integer) 1
+SADD frutas "manzana"
+20:30:21 23 Oct 2024
+1.048 msec
+(integer) 1
+
+SISMEMBER frutas "manzana"
+(integer) 1
+
+SMEMBERS frutas
+1) "naranja"
+2) "manzana"
+3) "banana"
+
+SREM frutas "banana"
+(integer) 1
+
+SMEMBERS frutas
+1) "naranja"
+2) "manzana"
+
+HSET usuario:1 nombre "Rafael" edad 30 ciudad "Madrid"
+(integer) 3
+
+HGETALL usuario:1
+1) "nombre"
+2) "Rafael"
+3) "edad"
+4) "30"
+5) "ciudad"
+6) "Madrid"
+
+HSET usuario:1 ciudad "Valencia"
+(integer) 0
+
+HGET usuario:1 ciudad
+"Valencia"
+
+SET session_id "abc123" EX 60
+"OK"
+
+GET session_id
+"abc123"
+
+GET session_id
+(nil)
+
+MULTI
+"OK"
+
+SET clave1 "valor1"
+SET clave2 "valor2"
+"QUEUED"
+"QUEUED"
+
+EXEC
+1) "OK"
+2) "OK"
+
+GET clave1
+GET clave2
+"valor1"
+"valor2"
+
